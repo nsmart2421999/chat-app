@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      How to create auto-resize textarea using JavaScript/jQuery?
+    </title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      #autoresizing {
+        height: 44px;
+        padding: 10px;
+        /* border: none; Bug không giảm height được */
+        resize: none;
+      }
+
+      .div1 {
+        background: red;
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        height: 350px;
+      }
+
+      .div2 {
+        background: blue;
+        width: 100px;
+        height: 300px;
+        overflow-y: scroll;
+      }
+
+      .div3 {
+        background: green;
+        width: 100px;
+        height: 150px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="div1">
+      <div class="div2">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo, quisquam
+        laudantium. Doloribus, tempore provident quos cumque architecto
+        excepturi nihil eum fuga ipsum sit aliquid. Et, nemo. Sint expedita
+        illum commodi.
+      </div>
+      <div class="div3">
+        <textarea id="autoresizing"></textarea>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      textarea = document.querySelector("#autoresizing");
+      textarea.addEventListener("input", autoResize, false);
+
+      function autoResize() {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+      }
+    </script>
+  </body>
+</html>
