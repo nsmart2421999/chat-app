@@ -2,7 +2,7 @@
   <div id="app">
     <b-row class="m-0">
       <b-col class="left-panel pt-2" cols="4">
-        <user-panel />
+        <room-panel />
       </b-col>
       <b-col class="right-panel my-3" cols="8">
         <chat-panel />
@@ -12,19 +12,13 @@
 </template>
 
 <script>
-import io from "socket.io-client";
-import UserPanel from "./components/UserPanel";
+import RoomPanel from "./components/RoomPanel";
 import ChatPanel from "./components/ChatPanel";
 
 export default {
-  name: "App",
   components: {
-    "user-panel": UserPanel,
+    "room-panel": RoomPanel,
     "chat-panel": ChatPanel
-  },
-  created() {
-    const socket = io("ws://localhost:3000");
-    socket.on("message", message => console.log(message));
   }
 };
 </script>
