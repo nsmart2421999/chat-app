@@ -26,9 +26,24 @@
       }
 
       .div2 {
+        position: relative;
         background: blue;
         width: 100px;
         height: 300px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+
+      .div2::-webkit-scrollbar {
+        display: none;
+      }
+
+      .div4 {
+        transform: rotate(180deg);
+        background: yellow;
+        width: 100px;
+        height: 100%;
+        overflow-x: hidden;
         overflow-y: scroll;
       }
 
@@ -43,13 +58,10 @@
   <body>
     <div class="div1">
       <div class="div2">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo, quisquam
-        laudantium. Doloribus, tempore provident quos cumque architecto
-        excepturi nihil eum fuga ipsum sit aliquid. Et, nemo. Sint expedita
-        illum commodi.
+        <div class="div4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus quis nostrum explicabo ad velit voluptatem quisquam reprehenderit sit. Voluptates reprehenderit ut ipsa tempore deleniti aut aspernatur suscipit. Sapiente, optio quidem?</div>
       </div>
       <div class="div3">
-        <textarea id="autoresizing"></textarea>
+        <!-- <textarea id="autoresizing"></textarea> -->
       </div>
     </div>
 

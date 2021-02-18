@@ -1,23 +1,36 @@
 <template>
   <div class="message-box mt-3">
-    <textarea placeholder="Type something..." @input="onTypingMessage"></textarea>
+    <textarea
+      v-model="message"
+      placeholder="Type something..."
+      @input="typeMessage"
+      @keypress.enter.prevent="sendMessage"
+    ></textarea>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
+
 export default {
   data() {
     return {
-      height: 44
+      height: 44,
+      socket: null,
+      message: ""
     };
+  },
+  computed: {
+    ...mapState(["currentConversation"])
   },
   watch: {
     height(newVal, oldVal) {
-      this.$emit("autoScroll", newVal - oldVal);
+      this.$eventBus.$emit("autoScroll", newVal - oldVal);
     }
   },
   methods: {
-    onTypingMessage({ target }) {
+    ...mapMutations(["send"]),
+    typeMessage({ target }) {
       const height = parseInt(target.scrollHeight);
 
       if (height - 22 <= 24 * 3) {
@@ -25,6 +38,13 @@ export default {
         target.style.height = `${target.scrollHeight}px`;
         this.height = target.scrollHeight;
       }
+    },
+    sendMessage() {
+      this.$socketio.emit("message", {
+        message: this.message,
+        conversationId: this.currentConversation
+      });
+      this.message = "";
     }
   }
 };
@@ -34,7 +54,7 @@ export default {
 .message-box > textarea {
   height: 44px;
   padding: 10px;
-  border: none;/* Bug không giảm height được */
+  border: none; /* Bug không giảm height được */
   resize: none;
 }
 
